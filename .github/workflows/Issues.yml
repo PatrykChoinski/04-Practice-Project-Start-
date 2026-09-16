@@ -1,0 +1,30 @@
+name: Debug issue events
+
+on:
+  issues:
+
+permissions:
+  issues: read
+
+jobs:
+  show-event:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Wypisz cały event
+        env:
+          EVENT_JSON: ${{ toJson(github.event) }}
+        run: |
+          echo "=== CAŁY PAYLOAD EVENTU ==="
+          echo "$EVENT_JSON"
+
+      - name: Wypisz dane issue
+        run: |
+          echo "Akcja: ${{ github.event.action }}"
+          echo "Numer issue: #${{ github.event.issue.number }}"
+          echo "Tytuł: ${{ github.event.issue.title }}"
+          echo "Autor: ${{ github.event.issue.user.login }}"
+          echo "Stan: ${{ github.event.issue.state }}"
+          echo "URL: ${{ github.event.issue.html_url }}"
+          echo "Treść:"
+          echo "${{ github.event.issue.body }}"
