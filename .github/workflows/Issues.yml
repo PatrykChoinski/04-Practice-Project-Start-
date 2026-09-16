@@ -2,7 +2,8 @@ name: Debug issue events
 
 on:
   issues:
-
+    types: [opened, closed]
+    
 permissions:
   issues: read
 
